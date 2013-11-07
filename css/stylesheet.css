@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'ProximaNovaRegular';
+    src: url('proxima_nova-regular-webfont.eot');
+    src: url('proxima_nova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('proxima_nova-regular-webfont.woff') format('woff'),
+         url('proxima_nova-regular-webfont.ttf') format('truetype'),
+         url('proxima_nova-regular-webfont.svg#ProximaNovaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'HeraBig-Regular';
+	src: url('herabig-regular.eot');
+	src: url('herabig-regular.eot?#iefix') format('embedded-opentype'),
+		 url('herabig-regular.woff') format('woff'),
+		 url('herabig-regular.ttf') format('truetype'),
+		 url('herabig-regular.svg#herabig-regular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
