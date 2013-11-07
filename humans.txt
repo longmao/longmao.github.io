@@ -1,9 +1,0 @@
-TEAM
-
-	Guilherme Medeiros -- Desenvolvedor Front-End -- http://www.guilhermemedeiros.com.br
-
-
-SITE
-
-	HTML
-	CSS
