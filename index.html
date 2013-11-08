@@ -134,6 +134,11 @@
     })
     $that.prepend($nav)
   })
+
+  if(location.hash){
+    $("a[href='" + location.hash + "']").click()
+  }
+
 </script>
 
 </body>
