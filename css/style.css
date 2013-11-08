@@ -376,6 +376,17 @@ Main: Work
 	right: 0;
 	bottom: 0;
 	border-radius: 5px;
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+	/* IE 5-7 */
+	filter: alpha(opacity=50);
+
+	/* Netscape */
+	-moz-opacity: 0.5;
+
+	/* Safari 1.x */
+	-khtml-opacity: 0.5;
 
 
 	transition: all 300ms ease;
