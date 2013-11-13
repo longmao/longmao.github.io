@@ -232,7 +232,7 @@ Main: Home
 
 **************/
 
-#main-home {text-align: center; margin-top: 15%; min-height: 480px;}
+#main-home {display:block;text-align: center; margin-top: 15%; min-height: 480px;}
 .main > h1 {margin-bottom: 0px; line-height: 1.4;}
 
 
@@ -261,7 +261,7 @@ Main: About
 }
 
 #main-about ul.about_me li{
-	line-height: 28px;
+	line-height: 30px;
 }
 
 #main-about article {float: left; width: 33.3333333%; background: url(img_spacer_about.png) no-repeat center 50px; padding-top: 5px;}
@@ -743,4 +743,17 @@ Responsive: 320
 		font-size: 80px;
 	}
 
+}
+
+
+.icon_github,.icon_weibo{
+	padding-left: 30px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.icon_github{
+	background: url(../images/github.png) no-repeat left center;
+}
+.icon_weibo{
+	background: url(../images/weibo.png) no-repeat left center;
 }
