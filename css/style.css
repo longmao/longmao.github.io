@@ -776,4 +776,17 @@ Responsive: 320
     margin: 0 auto;
 }
 
+#main-contact p {
+    margin-top: 40px;
+    font-size: 14px;
+    width: 500px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-left: 170px;
+}
 #container .desc small em {text-transform: uppercase; color: #2fb49f;}
+#main-contact p span{float:left} 
+#main-contact p span img{
+    margin-top: -10px;
+}
