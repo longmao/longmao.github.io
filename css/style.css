@@ -761,3 +761,19 @@ Responsive: 320
 	background: url(../images/slides.png) no-repeat left center;
 }
 
+
+#container .desc{
+    margin:22px;
+}
+#container .desc small{
+    display: block;
+    font: 13px 'ProximaNovaRegular', Arial, sans-serif;
+    color: #999;
+    -webkit-text-size-adjust: none;
+    text-align: left;
+    line-height: 22px;
+    width: 432px;
+    margin: 0 auto;
+}
+
+#container .desc small em {text-transform: uppercase; color: #2fb49f;}
