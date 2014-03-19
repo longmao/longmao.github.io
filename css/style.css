@@ -529,6 +529,34 @@ Main: Contact
 	font-size: 14px;
 }
 
+#container .desc{
+    margin:22px;
+}
+#container .desc small{
+    display: block;
+    font: 13px 'ProximaNovaRegular', Arial, sans-serif;
+    color: #999;
+    -webkit-text-size-adjust: none;
+    text-align: left;
+    line-height: 22px;
+    width: 432px;
+    margin: 0 auto;
+}
+
+#main-contact p {
+    margin-top: 40px;
+    font-size: 14px;
+    width: 500px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-left: 170px;
+}
+#container .desc small em {text-transform: uppercase; color: #2fb49f;}
+#main-contact p span{float:left} 
+#main-contact p span img{
+    margin-top: -10px;
+}
 
 
 
@@ -743,6 +771,10 @@ Responsive: 320
 	.main > h1 {
 		font-size: 80px;
 	}
+	
+	#main-contact p{
+        padding-left:0
+    }
 
 }
 
@@ -763,31 +795,4 @@ Responsive: 320
 }
 
 
-#container .desc{
-    margin:22px;
-}
-#container .desc small{
-    display: block;
-    font: 13px 'ProximaNovaRegular', Arial, sans-serif;
-    color: #999;
-    -webkit-text-size-adjust: none;
-    text-align: left;
-    line-height: 22px;
-    width: 432px;
-    margin: 0 auto;
-}
 
-#main-contact p {
-    margin-top: 40px;
-    font-size: 14px;
-    width: 500px;
-    overflow: hidden;
-    margin: 0 auto;
-    padding-top: 15px;
-    padding-left: 170px;
-}
-#container .desc small em {text-transform: uppercase; color: #2fb49f;}
-#main-contact p span{float:left} 
-#main-contact p span img{
-    margin-top: -10px;
-}
