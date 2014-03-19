@@ -522,6 +522,7 @@ Main: Contact
 #main-contact > h2 {
 	padding-top: 100px;
 	clear: both;
+	margin-bottom: 40px;
 }
 #main-contact p{
 	margin-top: 40px;
