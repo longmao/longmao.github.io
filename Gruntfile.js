@@ -2,17 +2,50 @@ module.exports = function(grunt) {
 
     // Project configuration.
     var pkg = grunt.file.readJSON('package.json')
+    var assets_json = grunt.file.readJSON('config/assets.config.json');
+    var data = assets_json;
+    var helper = {
+        renderLinksTags: function(key) {
+            // `staticAssets`: default namespace of the grunt-static-versioning plugin
+            var obj = data.staticAssets[key];
+
+            if (obj && obj.css) {
+                return obj.css.map(function(src) {
+                    return '<link rel="stylesheet" href="public' + src + '">';
+                }).join('\n ');
+            } else {
+                return '';
+            }
+        },
+        // render all <script> tags based on key
+        renderScriptsTags: function(key) {
+            // `staticAssets`: default namespace of the grunt-static-versioning plugin
+            var obj = data.staticAssets[key];
+            if (obj && obj.js) {
+                return obj.js.map(function(src) {
+                    return '<script src="public' + src + '"></script>';
+                }).join('\n ');
+            } else {
+                return '';
+            }
+        }
+    }
+
     grunt.initConfig({
         pkg: pkg,
+        helper: helper,
         uglify: {
             options: {
                 beautify: pkg.env === "dev",
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             my_target: {
-                files: {
-                    'build/main.min.js': ['scripts/*.js']
-                }
+                files: [{
+                    src: [
+                        'scripts/*.js',
+                    ],
+                    dest: 'build/main.min.js'
+                }]
             }
         },
         jshint: {
@@ -31,27 +64,16 @@ module.exports = function(grunt) {
         },
         cssmin: {
             minify: {
-                expand: true,
-                cwd: 'css/',
-                src: ['*.css', '!*.min.css'],
-                dest: 'css/',
-                ext: '.min.css'
+                files: [{
+                    src: ['css/*.css'],
+                    dest: 'css/main.min.css'
+                }]
             }
-        },
-        watch: {
-            scripts: {
-                files: ['css/*.less'],
-                tasks: ['less', 'cssmin', 'csslint'],
-                options: {
-                    spawn: false,
-                    livereload: true
-                },
-            },
         },
         csslint: {
             strict: {
                 options: {
-                    import: 2
+                    import: pkg.env === "dev"
                 },
                 src: ['css/*.css']
             },
@@ -72,6 +94,43 @@ module.exports = function(grunt) {
                 ext: '.js'
             },
         },
+        versioning: {
+            options: {
+                cwd: 'public',
+                outputConfigDir: 'config'
+            },
+            dist: {
+                files: [{
+                    assets: '<%= uglify.my_target.files %>',
+                    key: 'global',
+                    dest: 'js',
+                    type: 'js',
+                    ext: '.min.js'
+                }, {
+                    assets: '<%= cssmin.minify.files %>',
+                    key: 'global',
+                    dest: 'css',
+                    type: 'css',
+                    ext: '.min.css'
+                }]
+            }
+        },
+        preprocess: {
+
+            prod: {
+                src: 'main.html',
+                dest: 'index.html',
+                options: {
+                    context: {
+                        links: '<%= helper.renderLinksTags("global") %>',
+                        scripts: '<%= helper.renderScriptsTags("global") %>',
+                    }
+
+                }
+
+            }
+
+        },
         htmlmin: { // Task
             dist: { // Target
                 options: { // Target options
@@ -81,10 +140,11 @@ module.exports = function(grunt) {
                     minifyCSS: pkg.env === "pro"
                 },
                 files: { // Dictionary of files
-                    'index.html': 'main.html',
+                    'index.html': 'index.html',
                 }
             }
         }
+
     });
 
     // Load the plugin that provides the "uglify" task.
@@ -98,8 +158,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-static-versioning');
+    grunt.loadNpmTasks('grunt-preprocess');
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'less', 'cssmin', 'csslint', 'coffee', 'htmlmin']);
+    grunt.registerTask('default', ['less', 'coffee', 'uglify', 'cssmin', 'versioning', 'preprocess', 'htmlmin']);
     grunt.registerTask('js_hint', ['jshint:all']);
     grunt.registerTask('css_min', ['cssmin']);
     grunt.registerTask('css_lint', ['csslint']);
