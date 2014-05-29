@@ -2,13 +2,19 @@ module.exports = function(grunt) {
 
     // Project configuration.
     var pkg = grunt.file.readJSON('package.json')
-    var assets_json = grunt.file.readJSON('config/assets.config.json');
-    var data = assets_json;
+
+
     var helper = {
+        getAssetsData: function() {
+            var assets_json = grunt.file.readJSON('config/assets.config.json');
+            var data = assets_json;
+            return data
+        },
         renderLinksTags: function(key) {
             // `staticAssets`: default namespace of the grunt-static-versioning plugin
+            var data = this.getAssetsData()
             var obj = data.staticAssets[key];
-
+            console.log(obj)
             if (obj && obj.css) {
                 return obj.css.map(function(src) {
                     return '<link rel="stylesheet" href="public' + src + '">';
@@ -20,6 +26,7 @@ module.exports = function(grunt) {
         // render all <script> tags based on key
         renderScriptsTags: function(key) {
             // `staticAssets`: default namespace of the grunt-static-versioning plugin
+            var data = this.getAssetsData()
             var obj = data.staticAssets[key];
             if (obj && obj.js) {
                 return obj.js.map(function(src) {
@@ -55,10 +62,11 @@ module.exports = function(grunt) {
             development: {
                 options: {
                     paths: ["css"],
-                    compress: pkg.env === "pro"
+                    compress: pkg.env === "pro",
+                    cleancss: pkg.env === "pro"
                 },
                 files: {
-                    "css/style.css": "css/*.less"
+                    "build/style.min.css": "css/*.less"
                 }
             }
         },
@@ -66,7 +74,7 @@ module.exports = function(grunt) {
             minify: {
                 files: [{
                     src: ['css/*.css'],
-                    dest: 'css/main.min.css'
+                    dest: 'build/style.min.css'
                 }]
             }
         },
@@ -143,6 +151,11 @@ module.exports = function(grunt) {
                     'index.html': 'index.html',
                 }
             }
+        },
+        // Deletes build folder
+        clean: {
+            build_folder: ["build"],
+            css: 'css/style.css'
         }
 
     });
@@ -150,6 +163,8 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
+
+    grunt.loadNpmTasks('grunt-contrib-clean');
     // Load the plugin that provides the "jshint" task.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -161,7 +176,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-static-versioning');
     grunt.loadNpmTasks('grunt-preprocess');
     // Default task(s).
-    grunt.registerTask('default', ['less', 'coffee', 'uglify', 'cssmin', 'versioning', 'preprocess', 'htmlmin']);
+    grunt.registerTask('default', ['less', 'coffee', 'uglify', 'versioning', 'preprocess', 'htmlmin', 'clean']);
     grunt.registerTask('js_hint', ['jshint:all']);
     grunt.registerTask('css_min', ['cssmin']);
     grunt.registerTask('css_lint', ['csslint']);
