@@ -126,7 +126,7 @@ module.exports = function(grunt) {
         preprocess: {
 
             prod: {
-                src: 'main.html',
+                src: 'test.html',
                 dest: 'index.html',
                 options: {
                     context: {
