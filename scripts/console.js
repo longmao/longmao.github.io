@@ -1,6 +1,6 @@
 if (window.console) {
     var cons = console;
-    var condition = "jobhunting"
+    var condition = "work"
     if (cons) {
         switch (condition) {
             case "jobhunting":
