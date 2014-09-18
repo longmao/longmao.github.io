@@ -150,6 +150,17 @@ module.exports = function(grunt) {
                 files: { // Dictionary of files
                     'index.html': 'index.html',
                 }
+            },
+            test: { // Target
+                options: { // Target options
+                    removeComments: pkg.env === "pro",
+                    collapseWhitespace: pkg.env === "pro",
+                    minifyJS: pkg.env === "pro",
+                    minifyCSS: pkg.env === "pro"
+                },
+                files: { // Dictionary of files
+                    'testHtmlMin.html': 'testHtmlMin.html',
+                }
             }
         },
         // Deletes build folder
@@ -180,6 +191,7 @@ module.exports = function(grunt) {
     grunt.registerTask('js_hint', ['jshint:all']);
     grunt.registerTask('css_min', ['cssmin']);
     grunt.registerTask('css_lint', ['csslint']);
+    grunt.registerTask('htmlmin_test', ['htmlmin:test']);
 
     // A very basic default task.
 
