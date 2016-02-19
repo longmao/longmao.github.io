@@ -12,4 +12,4 @@ if (window.console) {
         }
 
     }
-}
+}x
