@@ -5,6 +5,7 @@
   "main": "index.js",
   "env": "pro",
   "scripts": {
+    "build":"grunt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "longmao",
